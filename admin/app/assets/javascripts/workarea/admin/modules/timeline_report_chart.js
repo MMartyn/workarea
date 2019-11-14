@@ -19,6 +19,27 @@ WORKAREA.registerModule('timelineReportChart', (function () {
             chart.update();
         },
 
+        hideTooltip = function (chart, event) {
+            var $target = $(event.currentTarget),
+                date = new Date($target.data('timelineReportChartEvent'));
+        },
+
+        showTooltip = function (chart, event) {
+            var $target = $(event.currentTarget),
+                date = new Date($target.data('timelineReportChartEvent')),
+                activeElements = chart.tooltip._active || [];
+
+            debugger
+        },
+
+        setupSidebar = function (chart) {
+            $(chart.canvas)
+                .closest('.view')
+                    .find('[data-timeline-report-chart-event]')
+                    .on('mouseenter', _.partial(showTooltip, chart))
+                    .on('mouseleave', _.partial(hideTooltip, chart));
+        },
+
         setupLegend = function (chart) {
             var legend = JST['workarea/admin/templates/chart_legend']({
                 datasets: chart.data.datasets,
@@ -100,6 +121,7 @@ WORKAREA.registerModule('timelineReportChart', (function () {
                 chart = new Chart(canvas.getContext('2d'), getConfig(data));
 
             setupLegend(chart);
+            setupSidebar(chart);
         },
 
         init = function ($scope) {

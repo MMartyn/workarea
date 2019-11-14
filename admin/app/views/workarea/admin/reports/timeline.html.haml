@@ -27,7 +27,7 @@
           - else
             %ol
               - @report.events.each do |date, events|
-                %li
+                %li{ data: { timeline_report_chart_event: date } }
                   %strong= date.strftime('%B %d, %Y')
                   %ul
                     - events.each do |event|
