@@ -3347,6 +3347,7 @@ en:
           units_sold: Units Sold
           customers: Customers
           releases: Releases
+          custom_events: Custom Events
           summary:
             intro_html:
               one: Over the last <strong>3 Months</strong> there has been <strong>%{count} Release</strong> with

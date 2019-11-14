@@ -12,6 +12,8 @@ module Workarea
     field :undone_at, type: Time # TODO deprecated, remove in v3.6
     field :undo_job_id, type: String # TODO deprecated, remove in v3.6
 
+    alias_method :occurred_at, :published_at
+
     has_many :changesets, class_name: 'Workarea::Release::Changeset'
     has_one :undo, class_name: 'Workarea::Release', inverse_of: :undoes
     belongs_to :undoes, class_name: 'Workarea::Release', inverse_of: :undo, optional: true

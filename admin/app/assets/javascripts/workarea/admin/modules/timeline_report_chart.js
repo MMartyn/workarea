@@ -36,9 +36,8 @@ WORKAREA.registerModule('timelineReportChart', (function () {
             return _.map(dataset, function (item) {
                 var data = { x: new Date(item.x) };
 
-                if (type === 'releases') {
+                if (type === 'releases' || type === 'custom_events') {
                     data.y = item.y > 0 ? 0 : null;
-                    data.releaseCount = item.y;
                 } else {
                     data.y = item.y || 0;
                 }
@@ -67,6 +66,14 @@ WORKAREA.registerModule('timelineReportChart', (function () {
                     dataConfig.pointStyle = 'triangle';
                     dataConfig.radius = 10;
                     dataConfig.hoverRadius = 13;
+                    dataConfig.showLine = false;
+                }
+
+                if (type === 'custom_events') {
+                    dataConfig.pointStyle = 'star';
+                    dataConfig.radius = 10;
+                    dataConfig.hoverRadius = 13;
+                    dataConfig.showLine = false;
                 }
 
                 dataConfig.data = transformDataset(dataset, type);

@@ -17,4 +17,15 @@
         -# Generated via JS
 
     .section
-      %canvas#timeline-report{ data: { timeline_report_chart: @report.graph_data.to_json } }
+      .grid
+        .grid__cell.grid__cell--80-at-medium
+          %canvas#timeline-report{ data: { timeline_report_chart: @report.graph_data.to_json } }
+
+        .grid__cell.grid__cell--20-at-medium
+          - if @report.events.any?
+            %ol
+              - @report.events.each do |event|
+                %li
+                  %strong
+                    = event.date.strftime('%B %d, %Y')
+                  = event.name
