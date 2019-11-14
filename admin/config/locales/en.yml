@@ -3348,6 +3348,7 @@ en:
           customers: Customers
           releases: Releases
           custom_events: Custom Events
+          no_events: There are no events for this date range.
           summary:
             intro_html:
               one: Over the last <strong>3 Months</strong> there has been <strong>%{count} Release</strong> with

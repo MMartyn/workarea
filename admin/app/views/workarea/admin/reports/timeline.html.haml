@@ -22,10 +22,13 @@
           %canvas#timeline-report{ data: { timeline_report_chart: @report.graph_data.to_json } }
 
         .grid__cell.grid__cell--20-at-medium
-          - if @report.events.any?
+          - if @report.events.empty?
+            = t('workarea.admin.reports.timeline.no_events')
+          - else
             %ol
-              - @report.events.each do |event|
+              - @report.events.each do |date, events|
                 %li
-                  %strong
-                    = event.date.strftime('%B %d, %Y')
-                  = event.name
+                  %strong= date.strftime('%B %d, %Y')
+                  %ul
+                    - events.each do |event|
+                      %li= event.name

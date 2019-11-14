@@ -5,7 +5,13 @@ module Workarea
         include GroupByTime
 
         class Event
-          def self.build(*data)
+          def self.build(*events)
+            events
+              .flatten
+              .map { |e| self.new(e.name, e.occurred_at.to_date) }
+              .group_by { |e| e.date }
+              .sort
+              .to_h
           end
 
           attr_reader :name, :date
@@ -42,7 +48,7 @@ module Workarea
         end
 
         def events
-          []
+          @events ||= Event.build(releases, custom_events)
         end
 
         private
